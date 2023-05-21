@@ -28,8 +28,7 @@ class DtsService:
             query = self.uow.shipment_repo.create(deserialized_data)
             self.uow.persist_data()
         except Exception as e:
-            (error,) = e.args
-            raise Exception(error)
+            raise Exception("Ship with waybill no already exist.")
 
         return shipment_schema.dump(query)
 
