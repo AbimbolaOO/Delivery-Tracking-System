@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dts-deloyment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dts-deloyment
+  template:
+    metadata:
+      labels:
+        app: dts-deloyment
+    spec:
+      containers:
+        - name: dts-deloyment
+          image: abimbolaolayemi/delivery-tracking-system:latest
+          # resources:
+          #   limits:
+          #     memory: '512Mi'
+          #     cpu: '500m'
+          ports:
+            - containerPort: 5000
+          env:
+            - name: SECRET_KEY
+              value: 'qqMr9YHOUbSJziwoQqwobNrllN6plkofOA01MglyWIJu1qLv6GpI0xrt71AkHaE9PYQfcu4-Vb6we1zfSj3mnQ'
+            - name: DATABASE_URL
+              value: 'postgresql://yemicode:password@localhost:5432/postgres'
+            - name: DEVELOPMENT_MODE
+              value: 'production'
+            - name: PORT
+              value: '5000'
+            - name: REDIS_URI
+              value: 'redis://redis-cluster-ip-service/0'
+

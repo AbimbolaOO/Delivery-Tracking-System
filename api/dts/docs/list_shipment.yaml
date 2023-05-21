@@ -1,0 +1,101 @@
+Filter for list of shipments
+---
+tags:
+  - Delivery Tracking System
+summary: Returns a list of shipments base on the filter
+produces:
+  - application/json
+parameters:
+  - in: query
+    name: is_completed
+    type: bool
+    description: Help to filter for complete and uncompleted shipments.
+    default: false
+  - in: query
+    name: page
+    type: integer
+    description: Current page number starting at 0.
+  - in: query
+    name: per_page
+    type: integer
+    description: Number of shipments to return.
+
+responses:
+  200:
+    description: Return when a waybill detail is requested.
+    examples:
+      application/json:
+        status: success
+        message: Shipment details.
+        data: 
+          - {
+            "is_cancelled": false,
+            "waybill_no": "NG010050895215",
+            "reciepient_address": "26, Ayugy street orile Ijesha",
+            "reciepient_name": "Godswill Gordon",
+            "ecommerce_company": "YemiIfeCorp.com",
+            "is_completed": false,
+            "updated_at": "2023-05-21T06:05:23.489676",
+            "reciepient_email": "yemiifecorp@gmail.com",
+            "reciepient_phone": "+2348119997733",
+            "id": "99700e0d-1b90-41cb-9d6a-c7a136eabec9",
+            "created_at": "2023-05-21T06:05:23.489670"
+          }
+          - {
+            "is_cancelled": false,
+            "waybill_no": "NG010050895216",
+            "reciepient_address": "26, Ayugy street orile Ijesha",
+            "reciepient_name": "Godswill Gordon",
+            "ecommerce_company": "YemiIfeCorp.com",
+            "is_completed": false,
+            "updated_at": "2023-05-21T06:05:29.563654",
+            "reciepient_email": "yemiifecorp@gmail.com",
+            "reciepient_phone": "+2348119997733",
+            "id": "92e7dbdc-6f7d-4753-bc9b-da8a1d24dac1",
+            "created_at": "2023-05-21T06:05:29.563649"
+          }
+          - {
+            "is_cancelled": false,
+            "waybill_no": "NG010050895217",
+            "reciepient_address": "26, Ayugy street orile Ijesha",
+            "reciepient_name": "Godswill Gordon",
+            "ecommerce_company": "YemiIfeCorp.com",
+            "is_completed": false,
+            "updated_at": "2023-05-21T06:05:36.778421",
+            "reciepient_email": "yemiifecorp@gmail.com",
+            "reciepient_phone": "+2348119997733",
+            "id": "acd9cd1e-4037-4dee-89ea-b79c5f8dcb18",
+            "created_at": "2023-05-21T06:05:36.778374"
+          }
+
+  400:
+    description: Return when bad data is sent.
+    examples:
+      application/json:
+        data: null
+        message: Invalid waybill number.
+        status: error
+
+  404:
+    description: Returns when endpoint requested by client doesn't exist.
+    examples:
+      application/json:
+        status: error
+        message: Page Not Found.
+        data: Null
+
+  429: 
+    description: Returns when too many request are made to the server.
+    examples:
+      application/json:
+        data: null
+        message:  Too Many Requests.
+        status: error
+
+  500:
+    description: Internal Server Error.
+    examples:
+      application/json:
+        status: error
+        message: Internal Server Error.
+        data: Null

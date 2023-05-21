@@ -1,0 +1,86 @@
+Move shipment
+---
+tags:
+  - Delivery Tracking System
+summary: This attached a dispatcher if doesn't exist also track package hand changes
+produces:
+  - application/json
+parameters:
+  - in: path
+    name: waybill_no
+    type: string
+    description: waybill number of item.
+    required: true
+    default: NG010050895235
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - dispatcher_name
+        - package_status
+        - location
+      properties:
+        dispatcher_name:
+          type: string
+          example: Yemi Yellow
+        package_status:
+          type: string
+          enum: ["PICKED_UP", "IN_TRANSIT", "WAREHOUSE", "DELIVERED"]
+        location:
+          type: string
+          example: "23, Ajao estate warehouse"
+       
+responses:
+  200:
+    description: Return when a new shipment is moved or changed hands.
+    examples:
+      application/json:
+        status: success
+        message: Shipment created successfully.
+        data: 
+          dispatcher_name: Redhead boy
+          id: 96a03f79-c493-4e42-9f09-4f27485a1c49
+          package_status: IN_TRANSIT
+          location: "23, Ajao estate warehouse"
+          updated_at: "2023-05-21T04:25:56.612612"
+          shipment_id: ed7c6811-d2d2-4b34-801f-5e36c794131e
+          created_at: "2023-05-21T04:25:56.612554"
+
+  400:
+    description: Return when bad data is sent.
+    examples:
+      application/json:
+        data: null
+        message: 
+          {
+          "reciepient_email": [
+            "Not a valid email address."
+          ]
+        }
+        status: error
+
+  404:
+    description: Returns when endpoint requested by client doesn't exist.
+    examples:
+      application/json:
+        status: error
+        message: Page Not Found.
+        data: Null
+
+  429: 
+    description: Returns when too many request are made to the server.
+    examples:
+      application/json:
+        data: null
+        message:  Too Many Requests.
+        status: error
+
+  500:
+    description: Internal Server Error.
+    examples:
+      application/json:
+        status: error
+        message: Internal Server Error.
+        data: Null

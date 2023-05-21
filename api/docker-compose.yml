@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  delivery-tracking-system:
+    container_name: delivery-tracking-system
+    image: abimbolaolayemi/delivery-tracking-system
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    env_file:
+      - .env
+    # volumes:
+    #   - .:/app
+    depends_on:
+      - db
+      - cache
+
+  db:
+    container_name: db
+    image: postgres:14.5
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env
+    logging:
+      options:
+        max-size: 10m
+        max-file: '3'
+    volumes:
+      - db:/var/lib/postgres/data/
+    ports:
+      - '5432:5432'
+
+  cache:
+    container_name: cache
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes: 
+      - cache:/data
+
+# networks:
+#   postgres:
+#     driver: bridge
+
+volumes:
+  db:
+    driver: local
+  cache:
+    driver: local
+
+

@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: api.delivery-tracking-system-tls
+spec:
+  secretName: api.delivery-tracking-system.com
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: api.delivery-tracking-system.com
+  dnsNames:
+    - api.delivery-tracking-system.com
