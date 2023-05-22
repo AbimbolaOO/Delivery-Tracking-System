@@ -1,0 +1,97 @@
+Get a shipment and it's tracking data
+---
+tags:
+  - Delivery Tracking System
+summary: Return shipment of the given waybill_no
+produces:
+  - application/json
+parameters:
+  - in: query
+    name: waybill_no
+    type: string
+    description: Unique Waybill number.
+    default: NG010050895235
+
+responses:
+  200:
+    description: Return when a waybill detail is requested.
+    examples:
+      application/json:
+        status: success
+        message: Shipment details.
+        data: 
+          {
+            "reciepient_email": "yemiifecorp@gmail.com",
+            "tracker": [
+              {
+                "package_status": "WAREHOUSE",
+                "shipment_id": "ad552121-b6ef-4f68-a1fd-7a0374cce0a1",
+                "id": "8bc27dd7-2ff2-44fa-85ac-442936446b70",
+                "dispatcher_name": "Yemi Yellow",
+                "updated_at": "2023-05-21T04:47:49.417670",
+                "location": "23, Ajao estate warehouse",
+                "created_at": "2023-05-21T04:47:49.417631"
+              },
+              {
+                "package_status": "DELIVERED",
+                "shipment_id": "ad552121-b6ef-4f68-a1fd-7a0374cce0a1",
+                "id": "6e24f712-a0fe-4856-a89d-4fed6c2b7cbd",
+                "dispatcher_name": "Yemi Yellow",
+                "updated_at": "2023-05-21T04:50:52.620024",
+                "location": "23, Ajao estate warehouse",
+                "created_at": "2023-05-21T04:47:26.701541"
+              },
+              {
+                "package_status": "DELIVERED",
+                "shipment_id": "ad552121-b6ef-4f68-a1fd-7a0374cce0a1",
+                "id": "e5c08a09-a61f-4f40-a793-4396351e6c3f",
+                "dispatcher_name": "Yemi Yellow",
+                "updated_at": "2023-05-21T04:51:29.598605",
+                "location": "23, Ajao estate warehouse",
+                "created_at": "2023-05-21T04:47:36.723127"
+              }
+            ],
+            "waybill_no": "NG010050895235",
+            "id": "ad552121-b6ef-4f68-a1fd-7a0374cce0a1",
+            "reciepient_phone": "+2348119997733",
+            "is_cancelled": false,
+            "reciepient_address": "26, Ayugy street orile Ijesha",
+            "created_at": "2023-05-21T04:46:26.762512",
+            "updated_at": "2023-05-21T04:51:29.595874",
+            "reciepient_name": "Godswill Gordon",
+            "ecommerce_company": "YemiIfeCorp.com",
+            "is_completed": true
+          }
+          
+
+  400:
+    description: Return when bad data is sent.
+    examples:
+      application/json:
+        data: null
+        message: Invalid waybill number.
+        status: error
+
+  404:
+    description: Returns when endpoint requested by client doesn't exist.
+    examples:
+      application/json:
+        status: error
+        message: Page Not Found.
+        data: Null
+
+  429: 
+    description: Returns when too many request are made to the server.
+    examples:
+      application/json:
+        data: null
+        message:  Too Many Requests.
+        status: error
+
+  500:
+    description: Internal Server Error.
+    examples:
+      application/json:
+        status: error
+        message: Internal Server Error.
+        data: Null

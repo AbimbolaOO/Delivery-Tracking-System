@@ -1,0 +1,97 @@
+Create shipment
+---
+tags:
+  - Delivery Tracking System
+summary: Creates Shipments
+produces:
+  - application/json
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - waybill_no
+        - ecommerce_company
+        - reciepient_name
+        - reciepient_email
+        - reciepient_phone
+        - reciepient_address
+      properties:
+        waybill_no:
+          type: string
+          example: NG010050895235
+        ecommerce_company:
+          type: string
+          example: YemiIfeCorp.com
+        reciepient_name:
+          type: string
+          example: Godswill Gordon
+        reciepient_email:
+          type: string
+          example: yemiifecorp@gmail.com
+        reciepient_phone:
+          type: string
+          example: '+2348119997733'
+        reciepient_address:
+          type: string
+          example: '26, Ayugy street orile Ijesha'
+
+
+responses:
+  201:
+    description: Return when a new shipment is just created.
+    examples:
+      application/json:
+        status: success
+        message: Shipment created successfully.
+        data: 
+          ecommerce_company: YemiIfeCorp.com
+          reciepient_phone: "+2348119997733"
+          reciepient_name: Godswill Gordon
+          created_at: "2023-05-19T19:47:58.326726"
+          reciepient_address: 26 Ayugy street orile Ijesha
+          is_completed: false
+          is_cancelled: false
+          updated_at: "2023-05-19T19:47:58.326767"
+          id: 85e248a8-ed98-4f13-ac93-7e7ba9a2350c
+          reciepient_email: yemiifecorp@gmail.com
+          waybill_no: NG010050895243
+
+  400:
+    description: Return when bad data is sent.
+    examples:
+      application/json:
+        data: null
+        message: 
+          {
+          "reciepient_email": [
+            "Not a valid email address."
+          ]
+        }
+        status: error
+
+  404:
+    description: Returns when endpoint requested by client doesn't exist.
+    examples:
+      application/json:
+        status: error
+        message: Page Not Found.
+        data: Null
+    
+  429: 
+    description: Returns when too many request are made to the server.
+    examples:
+      application/json:
+        data: null
+        message:  Too Many Requests.
+        status: error
+
+  500:
+    description: Internal Server Error.
+    examples:
+      application/json:
+        status: error
+        message: Internal Server Error.
+        data: Null

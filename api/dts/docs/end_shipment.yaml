@@ -1,0 +1,62 @@
+End shipment
+---
+tags:
+  - Delivery Tracking System
+summary: Set the is_completed to true and package_status to DELIVERED
+produces:
+  - application/json
+parameters:
+  - name: body
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - waybill_no
+      properties:
+        waybill_no:
+          type: string
+          example: NG010050895235
+       
+
+
+responses:
+  200:
+    description: Return when a new shipment is ended.
+    examples:
+      application/json:
+        status: success
+        message: Ended Shipment delivery.
+        data: null
+
+  400:
+    description: Return when bad data is sent.
+    examples:
+      application/json:
+        data: null
+        message: "Invalid waybill number."
+        status: error
+
+  404:
+    description: Returns when endpoint requested by client doesn't exist.
+    examples:
+      application/json:
+        status: error
+        message: Page Not Found.
+        data: Null
+
+  429: 
+    description: Returns when too many request are made to the server.
+    examples:
+      application/json:
+        data: null
+        message:  Too Many Requests.
+        status: error
+
+  500:
+    description: Internal Server Error.
+    examples:
+      application/json:
+        status: error
+        message: Internal Server Error.
+        data: Null

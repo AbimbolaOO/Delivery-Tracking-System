@@ -1,0 +1,13 @@
+.venv
+.dbdata
+__pycache__
+db.sqlite3
+try*.sh
+.env
+.ev.sample
+*.ipynb
+*.jpg
+instance
+.dist
+dump.rdb
+.vscode
