@@ -17,3 +17,4 @@ pytest
 docker stop postgresql
 docker stop redis_db
 docker system prune -f
+sudo rm migrations/versions/*.py
