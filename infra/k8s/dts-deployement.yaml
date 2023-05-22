@@ -25,7 +25,7 @@ spec:
             - name: SECRET_KEY
               value: 'qqMr9YHOUbSJziwoQqwobNrllN6plkofOA01MglyWIJu1qLv6GpI0xrt71AkHaE9PYQfcu4-Vb6we1zfSj3mnQ'
             - name: DATABASE_URL
-              value: 'postgresql://yemicode:password@localhost:5432/postgres'
+              value: 'postgresql://yemicode:password@postgres-cluster-ip-service:5432/postgres'
             - name: DEVELOPMENT_MODE
               value: 'production'
             - name: PORT

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-deployment
+  template:
+    metadata:
+      labels:
+        app: postgres-deployment
+    spec:
+      containers:
+        - name: postgres-deployment
+          image: postgres:latest
+          # resources:
+          #   limits:
+          #     memory: '256Mi'
+          #     cpu: '500m'
+          ports:
+            - containerPort: 6379
+          env:
+            - name: POSTGRES_USER
+              value: 'yemicode'
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql
+                  key: PG_PASSWORD
+          volumeMounts:
+            - mountPath: /var/lib/postgres/data/
+              name: pgdb
+
+      volumes:
+        - name: pgdb
+          persistentVolumeClaim:
+            claimName: pg-claim
+            
