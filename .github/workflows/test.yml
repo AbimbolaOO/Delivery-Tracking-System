@@ -46,8 +46,6 @@ jobs:
         export PORT=5000
         export DEVELOPMENT_MODE=development
 
-        sudo rm migrations/versions/*.py
-
         alembic revision --autogenerate -m "initial migrations"
         alembic upgrade head
 
